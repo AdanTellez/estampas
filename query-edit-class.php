@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Editar Clase</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

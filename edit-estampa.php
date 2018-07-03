@@ -24,6 +24,7 @@
 <html>
 <head>
 	<title>Edit estampa</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

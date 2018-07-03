@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Agregar Categoría</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Agregar estampa</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Buscar estampa</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

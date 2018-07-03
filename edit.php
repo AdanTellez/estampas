@@ -16,6 +16,7 @@ while($res 	= mysqli_fetch_array($result))
 <html>
 <head>	
 	<title>Estampas</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>
