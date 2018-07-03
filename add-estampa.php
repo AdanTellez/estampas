@@ -5,6 +5,7 @@
 <html>
 <head>
 	<title>Add Data</title>
+	<?php include 'header.php';?>    
 </head>
 
 <body>

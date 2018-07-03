@@ -14,6 +14,7 @@
 <html>
 <head>
 	<title>Edit Clase</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>

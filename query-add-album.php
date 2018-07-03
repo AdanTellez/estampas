@@ -1,6 +1,7 @@
 <html>
 <head>
 	<title>Add Album</title>
+	<?php include 'header.php';?>
 </head>
 
 <body>
