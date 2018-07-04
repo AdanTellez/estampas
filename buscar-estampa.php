@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<a href="index.php">Home</a>
+<a href="index.php">Volver a Inicio</a>
 <?php
 //including the database connection file
 include_once("config.php");
@@ -158,14 +158,14 @@ include_once("config.php");
                         $precio = $costo_estm['precio'];
                     }
 
-                    print $no_cantidad[$j][1]." estampas de nombre ".$no_cantidad[$j][0]." con un costo individual de: ".$precio;
+                    print $no_cantidad[$j][1]." estampas con número ".$no_cantidad[$j][0]." con un costo individual de: ".$precio;
                     echo "<br>";
                 }
             }
             if(isset($faltante)){
                 if($i <= ($fal_total-1)){
                     if($faltante[$i][2] == $aux){
-                        print "*Faltan ".$faltante[$i][0]." estampas de nombre: ".$faltante[$i][1];
+                        print "*Faltan ".$faltante[$i][0]." estampas con número: ".$faltante[$i][1];
                     }
                     echo "<br>";
                 }

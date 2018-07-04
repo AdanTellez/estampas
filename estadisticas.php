@@ -11,7 +11,7 @@ include_once("config.php");
 </head>
 
 <body>
-<a href="index.php">Home</a>
+<a href="index.php">Volver a Inicio</a>
 <?php echo "<h2>Estampas vendidas"; ?>
   <table width='50%' border=0>
 

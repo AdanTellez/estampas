@@ -13,7 +13,7 @@
     <?php
         include_once("config.php");
     ?>
-	<a href="index.php">Home</a>
+	<a href="index.php">Volver a Inicio</a>
 	<br/><br/>
 
 	<form action="query-add-estampa.php" method="post" name="form1">
