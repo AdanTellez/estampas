@@ -46,6 +46,7 @@ $result_clase = mysqli_query($mysqli, "SELECT * FROM clase ORDER BY id_clase DES
         <div class="center col three">
            <h2>Album</h2>
             <a href="add-album.php">Add New Album</a>
+            <a href="estadisticas.php">Estadísticas</a>
         </div>
 
         <div class="center col three">
@@ -90,7 +91,7 @@ $result_clase = mysqli_query($mysqli, "SELECT * FROM clase ORDER BY id_clase DES
                 echo "<td>".$res['nombre']."</td>";
             //id->id_album
             //aux=2 == borrado de album
-                echo "<td><a href=\"edit.php?id=$res[id_album]\">Estampas</a> | <a href=\"delete.php?id=$res[id_album]&aux=2\" onClick=\"return confirm('Are you sure you want to delete?, todas las estampas del album serán eliminadas')\">Borrar</a></td>";		
+                echo "<td><a href=\"edit.php?id=$res[id_album]\">Estampas</a> | <a href=\"delete.php?id=$res[id_album]&aux=2\" onClick=\"return confirm('Are you sure you want to delete?, todas las estampas del álbum serán eliminadas')\">Borrar</a></td>";		
             }
             ?>
             </table>
