@@ -15,6 +15,7 @@
 include_once("config.php");
 
     $estampas = $_POST['estampas'];
+    $id_album = $_POST['id_album'];
     //$estampas="16-123-8,12-66,3";  
     $estampas = trim($estampas);
     $tamaño   = strlen($estampas);
@@ -76,7 +77,14 @@ include_once("config.php");
     for($i = 0; $i <= ($can_estampas-1); $i++){
         $id_estampa = $no_cantidad[$i][0];
         $total[$i] = array();
-        $result = mysqli_query($mysqli, "SELECT * FROM estampa WHERE no=$id_estampa");
+        $result = mysqli_query($mysqli, "SELECT * FROM estampa WHERE no=$id_estampa AND id_album=$id_album");
+        $totalFilas    =    mysqli_num_rows($result);
+        if($totalFilas == 0){
+            $faltante[$contador][0] =  $no_cantidad[$i][1];
+            $faltante[$contador][1] =  $id_estampa;
+            $faltante[$contador][3] =  0;
+            $contador++;
+        }
 
         while($res = mysqli_fetch_array($result)){
             if($res['inventario'] < $no_cantidad[$i][1]){
@@ -86,6 +94,7 @@ include_once("config.php");
                 $faltante[$contador][0] =  ($no_cantidad[$i][1])-$res['inventario'];
                 $faltante[$contador][1] =  $id_estampa;
                 $faltante[$contador][2] =  $res['id_clase'];
+                $faltante[$contador][3] =  1;
                 $contador++;
                 $no_cantidad[$i][1]  = $res['inventario'];
 
@@ -139,11 +148,8 @@ include_once("config.php");
     echo '<pre>';
         //arreglo de los totales por clase
         //print_r($no_cantidad);
-        //print_r($faltante);
+        print_r($faltante);
         $total_general = 0;
-        if(isset($faltante)){
-            $fal_total = count($faltante);
-        }
         
     for($i = 0; $i <= ($can_total-2); $i++){
         $aux = $total[$i][0];
@@ -151,13 +157,15 @@ include_once("config.php");
         $result = mysqli_query($mysqli, "SELECT * FROM clase WHERE id_clase=$aux");
         while($res = mysqli_fetch_array($result)){
             for($j = 0; $j <= ($can_estampas-1); $j++){
-                if($no_cantidad[$j][3] == $aux){
-                    $id_estampa = $no_cantidad[$j][0];
-                    $costo_estampa = mysqli_query($mysqli, "SELECT * FROM estampa WHERE no=$id_estampa");
-                    while($costo_estm = mysqli_fetch_array($costo_estampa)){
-                        $precio = $costo_estm['precio'];
-                    }
+                if(isset($no_cantidad[$j][3])){
+                    if($no_cantidad[$j][3] == $aux){
+                        $id_estampa = $no_cantidad[$j][0];
+                        $costo_estampa = mysqli_query($mysqli, "SELECT * FROM estampa WHERE no=$id_estampa");
+                        while($costo_estm = mysqli_fetch_array($costo_estampa)){
+                            $precio = $costo_estm['precio'];
+                        }
 
+<<<<<<< HEAD
                     print $no_cantidad[$j][1]." estampas con número ".$no_cantidad[$j][0]." con un costo individual de: ".$precio;
                     echo "<br>";
                 }
@@ -166,8 +174,11 @@ include_once("config.php");
                 if($i <= ($fal_total-1)){
                     if($faltante[$i][2] == $aux){
                         print "*Faltan ".$faltante[$i][0]." estampas con número: ".$faltante[$i][1];
+=======
+                        print $no_cantidad[$j][1]." estampas de nombre: ".$no_cantidad[$j][0]." con un costo individual de: ".$precio;
+                        echo "<br>";
+>>>>>>> 2fd9aceb3e59688242f6686e1d5421587f6c162e
                     }
-                    echo "<br>";
                 }
             }
             print "El total de la clase ".$res['color']." es: ".$total[$i][1];
@@ -175,7 +186,23 @@ include_once("config.php");
         }
     }
     print "El total general es: ".$total_general;
-        echo "<br>";
+        echo "<br>";echo "<br>";
+        if(isset($faltante)){
+            $fal_total = count($faltante);
+            for($i = 0; $i <= ($fal_total-1) ; $i++){
+                if($faltante[$i][3] == 1){
+                    if($i <= ($fal_total-1)){
+                        if($faltante[$i][2] == $aux){
+                            print "*Faltan ".$faltante[$i][0]." estampas de nombre: ".$faltante[$i][1];
+                        }
+                        echo "<br>";
+                    }
+                }else{
+                    print "La estampa de nombre: ".$faltante[$i][1]." no pertenece al album indicado";
+                    echo "<br>";
+                }
+            }
+        }
         //print_r($total);
         //clases que existen en la busqueda
         //print_r($clase);
