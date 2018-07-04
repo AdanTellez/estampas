@@ -25,7 +25,18 @@ $result_clase = mysqli_query($mysqli, "SELECT * FROM clase ORDER BY id_clase DES
        <h1>Gestor de estampas</h1>
        
         <form action="buscar-estampa.php" method="post" >
-            <input type="text" class="big-space" name="estampas">  
+            <input type="text" class="big-space" name="estampas">
+              <?php
+                  include_once("config.php");
+                  $sql = "SELECT * FROM album";
+                  $query = mysqli_query($mysqli, $sql);
+
+                  echo '<select name="id_album" class="mid-space">';
+                      while ($row = mysqli_fetch_array($query)) {
+                          echo '<option value='.$row['id_album'].'>'.$row['nombre'].'</option>';
+                      }
+                  echo '</select>';
+              ?>
             <input type="submit" class="btn-green" name="class-selector" value="Cotizar estampas" >
         </form>
         
