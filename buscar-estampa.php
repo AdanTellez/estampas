@@ -30,6 +30,8 @@ include_once("config.php");
         $no_cantidad[$cont][1]=1; //para este arreglo, en su segunda dimensión, [0] es el no. de estampa
         $no_cantidad[$cont][2]=0;
         // y [1] es la cantidad de veces que se quiere dicha estampa.
+        // [2] es el total de las estampas
+        // [3] es el id de la clase
         
 
         //print $estampas[$i];
@@ -148,16 +150,28 @@ include_once("config.php");
         $total_general += $total[$i][1];
         $result = mysqli_query($mysqli, "SELECT * FROM clase WHERE id_clase=$aux");
         while($res = mysqli_fetch_array($result)){
-            print "El total de la clase ".$res['color']." es: ".$total[$i][1];
-            echo "<br>";
+            for($j = 0; $j <= ($can_estampas-1); $j++){
+                if($no_cantidad[$j][3] == $aux){
+                    $id_estampa = $no_cantidad[$j][0];
+                    $costo_estampa = mysqli_query($mysqli, "SELECT * FROM estampa WHERE no=$id_estampa");
+                    while($costo_estm = mysqli_fetch_array($costo_estampa)){
+                        $precio = $costo_estm['precio'];
+                    }
+
+                    print $no_cantidad[$j][1]." estampas de nombre ".$no_cantidad[$j][0]." con un costo individual de: ".$precio;
+                    echo "<br>";
+                }
+            }
             if(isset($faltante)){
                 if($i <= ($fal_total-1)){
                     if($faltante[$i][2] == $aux){
-                        print "Faltan ".$faltante[$i][0]." estampas ".$faltante[$i][1];
+                        print "*Faltan ".$faltante[$i][0]." estampas de nombre: ".$faltante[$i][1];
                     }
                     echo "<br>";
                 }
             }
+            print "El total de la clase ".$res['color']." es: ".$total[$i][1];
+            echo "<br>";echo "<br>";
         }
     }
     print "El total general es: ".$total_general;
